@@ -1,0 +1,24 @@
+{
+  "profile": {
+    "connected": false,
+    "name": null,
+    "email": null,
+    "dob": null,
+    "education": null,
+    "familyIncome": null,
+    "completion": 0,
+    "stVerified": null,
+    "stVerificationMessage": null
+  },
+  "documents": [],
+  "scholarships": [
+    { "id": "pre-matric", "name": "Pre-Matric Scholarship", "level": "Class 1–10 | School Education", "status": "More Information Required", "eligible": null },
+    { "id": "post-matric", "name": "Post-Matric Scholarship", "level": "Class 11–12 | Higher Education", "status": "More Information Required", "eligible": null },
+    { "id": "top-class", "name": "Top Class Scholarship", "level": "UG, PG | Professional Courses", "status": "More Information Required", "eligible": null },
+    { "id": "national-fellowship", "name": "National Fellowship for ST Students (NFST)", "level": "PhD | Research", "status": "More Information Required", "eligible": null },
+    { "id": "overseas", "name": "National Overseas Scholarship (NOS)", "level": "Higher Education | Abroad", "status": "More Information Required", "eligible": null }
+  ],
+  "applications": [],
+  "drafts": {},
+  "settings": { "theme": "Light", "language": "English", "notifications": true, "biometric": false }
+}
