@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "Adi Setu",
+    "slug": "adi-setu",
+    "scheme": "adi-setu",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "plugins": ["expo-router", ["expo-image-picker", { "photosPermission": "Allow Adi Setu to choose a profile picture from your photo library.", "cameraPermission": "Allow Adi Setu to take a profile picture.", "microphonePermission": false }]],
+    "experiments": { "typedRoutes": true },
+    "android": { "package": "com.adisetu.mobile" },
+    "ios": { "bundleIdentifier": "com.adisetu.mobile" }
+  }
+}

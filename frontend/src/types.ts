@@ -1,0 +1,25 @@
+export type Profile = {
+  connected: boolean;
+  name: string | null;
+  email: string | null;
+  dob: string | null;
+  address?: string | null;
+  education: string | null;
+  familyIncome: string | null;
+  guardianName?: string | null;
+  domicile?: string | null;
+  institution?: string | null;
+  course?: string | null;
+  academicInfo?: string | null;
+  completion: number;
+  stVerified: boolean | null;
+  stVerificationMessage: string | null;
+};
+export type VerificationState = 'verified' | 'mismatch' | 'unavailable' | 'manual-review' | 'pending';
+export type DocumentItem = { id: string; category?: string; name: string; issuer: string; status: string; updated: string; lastRetrievedAt?: string; sourceType?: 'issuer' | 'digilocker' | 'user-upload' | 'prototype'; verificationState?: VerificationState; manualReviewRequired?: boolean };
+export type Scholarship = { id: string; name: string; level: string; range?: string; deadline?: string; requiredDocuments?: string[]; status: string; eligible: boolean | null; eligibilityRules?: { educationLevels?: string[]; requiredFields?: string[] }; conflictRules?: { conflictsWith?: string[]; action?: 'review' | 'block'; explanation: string } };
+export type ApplicationStatus = 'Not Started' | 'Draft' | 'Submitted' | 'Under Verification' | 'Action Required' | 'Verified' | 'Sanctioned' | 'Disbursement Processing' | 'Disbursed' | 'Closed';
+export type Application = { id: string; scholarshipId: string; name: string; status: string; stage: string; isSubmitted?: boolean; submitted?: string; submittedAt?: string; updated?: string; completionPercentage?: number; requiredFields?: string[]; completedFields?: string[]; missingFields?: string[]; requiredDocuments?: string[]; uploadedDocuments?: string[]; missingDocuments?: string[]; verificationStatus?: string | null; nextAction?: string | null; applicationNumber?: string | null; deficiency?: string; pendingActions?: { id: string; title: string; explanation: string }[]; sanctionStatus?: string; paymentStatus?: 'Pending' | 'Processing' | 'Disbursed' | 'Unavailable'; paymentAmount?: number; dbtStatus?: string; lastPaymentUpdate?: string };
+export type IntegrationState = 'available' | 'unavailable' | 'proposed' | 'demo';
+export type IntegrationStatus = { id: 'digilocker' | 'certificate-verification' | 'scholarship-portal' | 'dbt' | 'education-source'; label: string; state: IntegrationState; description: string };
+export type AppData = { profile: Profile; documents: DocumentItem[]; scholarships: Scholarship[]; applications: Application[]; drafts?: Record<string, Record<string, unknown>>; settings: { theme: string; language: string; notifications: boolean; biometric: boolean }; digilocker: { configured: boolean; connected: boolean; demoMode: boolean } };

@@ -1,0 +1,15 @@
+import { useRouter } from 'expo-router';
+import { useState } from 'react';
+import { Alert, Pressable, StyleSheet, Switch, Text, View } from 'react-native';
+import { Card } from '../src/components/Card';
+import { Heading, Page } from '../src/components/Page';
+import { Icon, AppIconName } from '../src/components/Icon';
+import { api } from '../src/services/api';
+import { useApp } from '../src/context/AppContext';
+import { colors, createThemedStyles } from '../src/theme';
+import { t } from '../src/i18n';
+
+export default function SettingsScreen(){const router=useRouter();const {data,reload}=useApp();const [notifications,setNotifications]=useState(data?.settings.notifications??true);const [biometric,setBiometric]=useState(data?.settings.biometric??false);async function save(patch:object){try{await api.patch('/settings',patch);await reload()}catch(e){Alert.alert('Settings',e instanceof Error?e.message:'Could not save')}}
+return <Page><Heading eyebrow="PREFERENCES" title="Settings" subtitle="Choose how Adi Setu works for you."/><Card><Text style={styles.heading}>{t(data?.settings.language,'Appearance')}</Text><Row icon="moon-outline" label={t(data?.settings.language,'Theme')} value={data?.settings.theme||'Light'} onPress={()=>router.push('/theme')}/><Row icon="language-outline" label={t(data?.settings.language,'Language')} value={data?.settings.language||'English'} onPress={()=>router.push('/language')}/></Card><Card><Text style={styles.heading}>{t(data?.settings.language,'Preferences')}</Text><View style={styles.row}><Text style={styles.rowLabel}>Notifications</Text><Switch value={notifications} onValueChange={v=>{setNotifications(v);void save({notifications:v})}} trackColor={{false:colors.border,true:colors.primary}} thumbColor={notifications?colors.textPrimary:colors.disabledText}/></View><View style={styles.row}><Text style={styles.rowLabel}>Biometric login</Text><Switch value={biometric} onValueChange={v=>{setBiometric(v);void save({biometric:v})}} trackColor={{false:colors.border,true:colors.primary}} thumbColor={biometric?colors.textPrimary:colors.disabledText}/></View></Card><Card><Row icon="help-circle-outline" label={t(data?.settings.language,'Help Desk')} onPress={()=>router.push('/help')}/><Row icon="information-circle-outline" label={t(data?.settings.language,'FAQs')} onPress={()=>router.push('/faqs')}/></Card></Page>}
+function Row({icon,label,value,onPress}:{icon:AppIconName;label:string;value?:string;onPress:()=>void}){return <Pressable onPress={onPress} style={styles.row}><Icon name={icon}/><Text style={styles.rowLabel}>{label}</Text>{value?<Text style={styles.value}>{value}</Text>:null}<Icon name="chevron-forward" color={colors.textMuted}/></Pressable>}
+const styles=createThemedStyles((theme) => ({heading:{fontSize:13,fontWeight:'800',color:theme.textPrimary,marginBottom:4},row:{minHeight:47,flexDirection:'row',alignItems:'center',gap:10,borderBottomWidth:1,borderColor:theme.border},rowLabel:{flex:1,fontSize:12,color:theme.textSecondary},value:{fontSize:11,color:theme.primary,fontWeight:'700'}}));
